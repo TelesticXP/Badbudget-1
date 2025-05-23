@@ -1,4 +1,4 @@
-package com.example.badbudget
+package com.example.badbudget.models
 
 data class Budget(
     val id: String = "",

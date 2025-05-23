@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.badbudget.Category
+import com.example.badbudget.models.Category
 
 class CategoryAdapter(
     private val onDelete: (Category) -> Unit

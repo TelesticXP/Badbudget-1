@@ -4,11 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.badbudget.models.Budget
 import com.example.badbudget.databinding.ActivityInsightsBinding
+import com.example.badbudget.models.Expense
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import kotlinx.coroutines.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 

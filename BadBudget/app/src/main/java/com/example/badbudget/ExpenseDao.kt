@@ -4,7 +4,7 @@
 //import androidx.room.Insert
 //import androidx.room.Query
 //import com.example.badbudget.CategoryTotal
-//import com.example.badbudget.Expense
+//import com.example.badbudget.models.Expense
 //import com.example.badbudget.model.CategorySpend
 //
 //@Dao

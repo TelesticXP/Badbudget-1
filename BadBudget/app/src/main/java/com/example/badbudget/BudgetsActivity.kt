@@ -8,7 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButton
+import com.example.badbudget.models.Budget
 
 class BudgetsActivity : AppCompatActivity() {
 
@@ -65,10 +65,10 @@ class BudgetsActivity : AppCompatActivity() {
             val min = minTx.toDoubleOrNull() ?: 0.0
             val max = maxTx.toDouble()
             val budget = Budget(
-                category  = cat,
+                category = cat,
                 minAmount = min,
                 maxAmount = max,
-                userId    = UserSession.id(this)
+                userId = UserSession.id(this)
             )
 
             FirestoreService.addOrUpdateBudget(budget) { success ->
@@ -94,22 +94,22 @@ class BudgetsActivity : AppCompatActivity() {
 
     private fun showEditDialog(budget: Budget) {
         val view = layoutInflater.inflate(R.layout.dialog_budget, null)
-        val etCat = view.findViewById<EditText>(R.id.editTextBudgetCategory)
-        val etMin = view.findViewById<EditText>(R.id.editTextBudgetMin)
-        val etMax = view.findViewById<EditText>(R.id.editTextBudgetMax)
+        val category = view.findViewById<EditText>(R.id.editTextBudgetCategory)
+        val min = view.findViewById<EditText>(R.id.editTextBudgetMin)
+        val max = view.findViewById<EditText>(R.id.editTextBudgetMax)
 
         // pre-fill
-        etCat.setText(budget.category)
-        etMin.setText(budget.minAmount.toString())
-        etMax.setText(budget.maxAmount.toString())
+        category.setText(budget.category)
+        min.setText(budget.minAmount.toString())
+        max.setText(budget.maxAmount.toString())
 
         AlertDialog.Builder(this)
             .setTitle("Edit Budget")
             .setView(view)
             .setPositiveButton("Save") { dialog, _ ->
-                val newCat = etCat.text.toString().trim()
-                val newMin = etMin.text.toString().toDoubleOrNull() ?: 0.0
-                val newMax = etMax.text.toString().toDoubleOrNull() ?: 0.0
+                val newCat = category.text.toString().trim()
+                val newMin = min.text.toString().toDoubleOrNull() ?: 0.0
+                val newMax = max.text.toString().toDoubleOrNull() ?: 0.0
 
                 val updated = budget.copy(
                     category  = newCat,

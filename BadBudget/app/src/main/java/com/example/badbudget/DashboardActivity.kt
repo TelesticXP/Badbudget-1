@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.badbudget.databinding.ActivityDashboardBinding
+import com.example.badbudget.models.Budget
+import com.example.badbudget.models.Expense
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
@@ -21,7 +23,6 @@ class DashboardActivity : AppCompatActivity() {
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Navbar
         binding.navBudgets.setOnClickListener {
             startActivity(Intent(this, BudgetsActivity::class.java))
         }
@@ -45,19 +46,19 @@ class DashboardActivity : AppCompatActivity() {
         supportActionBar?.hide()
         binding.topAppBar.inflateMenu(R.menu.menu_dashboard)
 
-        // Fetches budgets and expenses
+        // draw charts
         FirestoreService.getExpenses(UserSession.id(this)) { allExpenses ->
             FirestoreService.getBudgets(UserSession.id(this)) { budgets ->
-                // Spending distribution
+                // get spending per category
                 val catMap = allExpenses
                     .groupBy { it.category }
                     .mapValues { it.value.sumOf { it.amount } }
                 updateSpendingPie(catMap)
 
-                // Compliance over last 30 days
+                // min and max pie chart for last 30 days
                 updateCompliancePie(allExpenses, budgets)
 
-                // Summary cards
+                // summary cards
                 val totalSpent = catMap.values.sum()
                 val budgetMax  = budgets.sumOf { it.maxAmount }
                 updateSummaryCards(totalSpent, budgetMax)
@@ -65,7 +66,7 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    // Spending per category pie chart
+    // spending
     private fun updateSpendingPie(catMap: Map<String, Double>) {
         if (catMap.isEmpty()) {
             binding.pieSpending.data = null
@@ -80,12 +81,20 @@ class DashboardActivity : AppCompatActivity() {
         binding.pieSpending.apply {
             data = PieData(ds)
             description.isEnabled = false
-            legend.isEnabled = false
+
+            // set up legend
+            legend.apply {
+                isEnabled = true
+                isWordWrapEnabled = true
+                horizontalAlignment = com.github.mikephil.charting.components.Legend.LegendHorizontalAlignment.CENTER
+            }
+
             setDrawEntryLabels(false)
             invalidate()
         }
     }
 
+    // compliance pie (min and max)
     private fun updateCompliancePie(allExpenses: List<Expense>, budgets: List<Budget>) {
         val cutoff = LocalDate.now()
             .minusDays(30)
@@ -109,17 +118,16 @@ class DashboardActivity : AppCompatActivity() {
         val entries = listOf(
             PieEntry(under.toFloat(), "Under Min"),
             PieEntry(onTrack.toFloat(), "On Track"),
-            PieEntry(over.toFloat(), "Over")
+            PieEntry(over.toFloat(), "Over Max")
         )
-        val colorsArr = intArrayOf(
-            ContextCompat.getColor(this, R.color.chartGrey),
-            ContextCompat.getColor(this, android.R.color.holo_green_light),
-            ContextCompat.getColor(this, android.R.color.holo_red_light)
-        )
+        val grey  = ContextCompat.getColor(this, R.color.chartGrey)
+        val green = ContextCompat.getColor(this, android.R.color.holo_green_light)
+        val red   = ContextCompat.getColor(this, android.R.color.holo_red_light)
+
         val ds = PieDataSet(entries, "").apply {
             setDrawValues(false)
             sliceSpace = 2f
-            setColors(colorsArr, this@DashboardActivity)
+            setColors(listOf(grey, green, red))
         }
         binding.pieCompliance.apply {
             data = PieData(ds)
@@ -130,7 +138,7 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    // Update text cards
+    // update summary cards
     private fun updateSummaryCards(spent: Double, max: Double) {
         binding.textTotalExpenses.text = "R ${spent.toInt()}"
         binding.textLastMonth.text =

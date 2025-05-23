@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.badbudget.Expense
+import com.example.badbudget.models.Expense
 import android.net.Uri
 
 class ExpenseAdapter : ListAdapter<Expense, ExpenseAdapter.VH>(DIFF) {

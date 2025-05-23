@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.badbudget.models.Expense
 
 class ExpenseHistoryAdapter(private val cb: Callback)
     : ListAdapter<Expense, ExpenseHistoryAdapter.VH>(DIFF) {

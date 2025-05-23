@@ -138,7 +138,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Spending Trends Chart Label -->
+    <!-- Spending Trends Label -->
     <TextView
         android:id="@+id/labelSpendingTrends"
         android:layout_width="wrap_content"
@@ -149,38 +149,39 @@
         app:layout_constraintTop_toBottomOf="@id/cardUpcomingBills"
         app:layout_constraintStart_toStartOf="@id/pieSpending" />
 
-    <!-- First PieChart -->
+    <!-- Spending Trends Pie -->
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pieSpending"
         android:layout_width="0dp"
         android:layout_height="200dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintTop_toBottomOf="@id/labelSpendingTrends"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/pieCompliance"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp" />
+        app:layout_constraintHorizontal_chainStyle="spread" />
 
-    <!-- Goal Compliance Label -->
+    <!-- Compliance Label -->
     <TextView
         android:id="@+id/labelCompliance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Goal Compliance (last 30 days)"
+        android:text="Compliance (last 30 days)"
         android:textStyle="bold"
         android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/cardUpcomingBills"
-        app:layout_constraintStart_toStartOf="@+id/pieSpending" />
+        app:layout_constraintTop_toBottomOf="@id/cardUpcomingBills"
+        app:layout_constraintStart_toStartOf="@id/pieCompliance" />
 
-    <!-- Compliance PieChart -->
+    <!-- Compliance Pie -->
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pieCompliance"
         android:layout_width="0dp"
         android:layout_height="200dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintTop_toBottomOf="@id/labelCompliance"
         app:layout_constraintStart_toEndOf="@id/pieSpending"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="8dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonInsights"

@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.badbudget.models.Expense
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import java.io.File
@@ -61,14 +62,14 @@ class AddExpenseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_expense)
 
-        // Back button/arrow
+        // back button
         backButton = findViewById(R.id.backButton)
         backButton.setOnClickListener {
             startActivity(Intent(this, ExpenseHistoryActivity::class.java))
             finish()
         }
 
-        // Form views
+        // form views
         editTextAmount           = findViewById(R.id.editTextAmount)
         spinnerCategory          = findViewById(R.id.spinnerCategory)
         buttonSelectDate         = findViewById(R.id.buttonSelectDate)
@@ -82,7 +83,7 @@ class AddExpenseActivity : AppCompatActivity() {
         imageViewReceiptPreview  = findViewById(R.id.imageViewReceiptPreview)
         buttonLogExpense         = findViewById(R.id.buttonLogExpense)
 
-        // Populate category spinner from Firestore budgets collection
+        // populate spinner
         FirestoreService.getBudgets(UserSession.id(this)) { budgets ->
             val cats = budgets.map { it.category }
                 .distinct()
@@ -94,7 +95,7 @@ class AddExpenseActivity : AppCompatActivity() {
             )
         }
 
-        // Image picker
+        // image picker
         pickImageLauncher = registerForActivityResult(
             ActivityResultContracts.GetContent()
         ) { uri: Uri? ->
@@ -108,7 +109,7 @@ class AddExpenseActivity : AppCompatActivity() {
             pickImageLauncher.launch("image/*")
         }
 
-        // Date picker
+        // date picker
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val calendar = Calendar.getInstance()
         buttonSelectDate.setOnClickListener {
@@ -125,7 +126,7 @@ class AddExpenseActivity : AppCompatActivity() {
             ).show()
         }
 
-        // Time pickers
+        // time pickers
         buttonSelectStartTime.setOnClickListener {
             val tCal = Calendar.getInstance()
             TimePickerDialog(
@@ -153,7 +154,7 @@ class AddExpenseActivity : AppCompatActivity() {
             ).show()
         }
 
-        // Log expense to Firestore
+        // add expense to firestore
         buttonLogExpense.setOnClickListener {
             val category = spinnerCategory.selectedItem?.toString()
                 ?: return@setOnClickListener toast("Pick a category first")
@@ -161,7 +162,7 @@ class AddExpenseActivity : AppCompatActivity() {
             if (amountTxt.isEmpty()) return@setOnClickListener toast("Amount is required")
             val amount = amountTxt.toDouble()
 
-            // Save receipt locally (optional)
+            // save receipt
             var savedPath: String? = null
             (imageViewReceiptPreview.drawable as? BitmapDrawable)?.bitmap?.let { bmp ->
                 savedPath = try {
@@ -174,14 +175,14 @@ class AddExpenseActivity : AppCompatActivity() {
 
             // Build Expense data class
             val expense = Expense(
-                amount      = amount,
-                category    = category,
-                date        = selectedDate,
-                startTime   = selectedStartTime,
-                endTime     = selectedEndTime,
+                amount = amount,
+                category = category,
+                date = selectedDate,
+                startTime = selectedStartTime,
+                endTime = selectedEndTime,
                 description = editTextDescription.text.toString().trim(),
                 receiptPath = savedPath,
-                userId      = UserSession.id(this)
+                userId = UserSession.id(this)
             )
 
             FirestoreService.addExpense(expense) { success ->

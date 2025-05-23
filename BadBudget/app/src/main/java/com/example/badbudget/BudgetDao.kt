@@ -1,7 +1,7 @@
 //package com.example.badbudget
 //
 //import androidx.room.*
-//import com.example.badbudget.Budget
+//import com.example.badbudget.Models.Budget
 //
 //@Dao
 //interface BudgetDao {
