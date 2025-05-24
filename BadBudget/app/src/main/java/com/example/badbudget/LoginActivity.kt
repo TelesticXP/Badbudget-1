@@ -50,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
                         val uid = auth.currentUser?.uid ?: ""
                         UserSession.init(this, uid)
+                        GamificationManager.recordLogin(this)
                         startActivity(Intent(this, DashboardActivity::class.java))
                         finish()
                     } else {

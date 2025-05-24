@@ -74,6 +74,7 @@ class BudgetsActivity : AppCompatActivity() {
             FirestoreService.addOrUpdateBudget(budget) { success ->
                 if (success) {
                     Toast.makeText(this, "Budget saved", Toast.LENGTH_SHORT).show()
+                    GamificationManager.onBudgetAdded(this)
                     // clear inputs
                     editTextBudgetCategory.text.clear()
                     editTextBudgetMin.text.clear()
