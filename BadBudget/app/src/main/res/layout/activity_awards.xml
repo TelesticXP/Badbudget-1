@@ -85,6 +85,74 @@
                 android:textSize="16sp" />
 
             <!-- Medals -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp">
+
+                <LinearLayout
+                    android:id="@+id/medalContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="8dp">
+
+                    <ImageView
+                        android:id="@+id/medal1"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/silver" />
+
+                    <ImageView
+                        android:id="@+id/medal2"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="12dp"
+                        android:src="@drawable/silver" />
+
+                    <ImageView
+                        android:id="@+id/medal3"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="12dp"
+                        android:src="@drawable/silver" />
+
+                    <ImageView
+                        android:id="@+id/medal4"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="12dp"
+                        android:src="@drawable/silver" />
+
+                    <ImageView
+                        android:id="@+id/medal5"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="12dp"
+                        android:src="@drawable/silver" />
+
+                    <ImageView
+                        android:id="@+id/medal6"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="12dp"
+                        android:src="@drawable/silver" />
+
+                    <ImageView
+                        android:id="@+id/medal7"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="12dp"
+                        android:src="@drawable/silver" />
+
+                    <ImageView
+                        android:id="@+id/medal8"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="12dp"
+                        android:src="@drawable/silver" />
+                </LinearLayout>
+            </HorizontalScrollView>
             <LinearLayout
                 android:id="@+id/layoutMedals"
                 android:layout_width="match_parent"
