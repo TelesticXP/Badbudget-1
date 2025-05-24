@@ -189,6 +189,7 @@ class AddExpenseActivity : AppCompatActivity() {
                 if (success) {
                     Toast.makeText(this, "Expense added!", Toast.LENGTH_SHORT).show()
                     GamificationManager.onExpenseLogged(this, savedPath != null)
+                    GamificationManager.onExpenseLogged(this)
                     finish()
                 } else {
                     Toast.makeText(this, "Failed to add expense", Toast.LENGTH_SHORT).show()
