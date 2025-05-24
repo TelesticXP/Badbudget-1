@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.RatingBar
+import com.example.badbudget.R
+import android.widget.RatingBar
+import android.widget.TextView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.example.badbudget.R.id
 
@@ -17,6 +20,17 @@ class AwardsActivity : AppCompatActivity() {
     private lateinit var progressPoints: CircularProgressIndicator
     private lateinit var ratingBar: RatingBar
     private lateinit var avatarView: ImageView
+    private lateinit var medals: List<ImageView>
+    private val badgeOrder = listOf(
+        "first_budget",
+        "first_expense",
+        "five_budgets",
+        "ten_expenses",
+        "receipt_keeper",
+        "first_category",
+        "five_categories",
+        "insights_viewer"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +41,20 @@ class AwardsActivity : AppCompatActivity() {
         progressPoints = findViewById(R.id.progressPoints)
         ratingBar = findViewById(R.id.ratingBar)
         avatarView = findViewById(R.id.imageAvatar)
+
+        textBadges = findViewById(R.id.textBadges)
+        progressPoints = findViewById(R.id.progressPoints)
+        ratingBar = findViewById(R.id.ratingBar)
+        medals = listOf(
+            findViewById(R.id.medal1),
+            findViewById(R.id.medal2),
+            findViewById(R.id.medal3),
+            findViewById(R.id.medal4),
+            findViewById(R.id.medal5),
+            findViewById(R.id.medal6),
+            findViewById(R.id.medal7),
+            findViewById(R.id.medal8)
+        )
 
         backButton.setOnClickListener {
             startActivity(Intent(this, DashboardActivity::class.java))
@@ -57,6 +85,12 @@ class AwardsActivity : AppCompatActivity() {
                 else -> R.drawable.avatar_one_star
             }
             avatarView.setImageResource(avatarRes)
+
+            badgeOrder.forEachIndexed { index, key ->
+                val img = medals.getOrNull(index) ?: return@forEachIndexed
+                val res = if (s.badges.contains(key)) R.drawable.gold else R.drawable.silver
+                img.setImageResource(res)
+            }
         }
     }
 }

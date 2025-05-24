@@ -74,6 +74,7 @@ class CategoriesActivity : AppCompatActivity() {
                         if (success) {
                             Toast.makeText(this, "Category added", Toast.LENGTH_SHORT).show()
                             loadCategories()
+                            GamificationManager.onCategoryAdded(this)
                         } else {
                             Toast.makeText(this, "Add failed", Toast.LENGTH_SHORT).show()
                         }

@@ -4,6 +4,10 @@ data class GamificationStats(
     val userId: String = "",
     val lastLoginDate: String = "",
     val loginStreak: Int = 0,
+    val monthKey: String = "",
+    val lastLoginDate: String = "",
+    val loginStreak: Int = 0,
+    val weekStreaks: Int = 0,
     val points: Int = 0,
     val badges: List<String> = emptyList()
 )

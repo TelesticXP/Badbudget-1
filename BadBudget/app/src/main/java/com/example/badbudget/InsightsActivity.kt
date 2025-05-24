@@ -23,6 +23,8 @@ class InsightsActivity : AppCompatActivity() {
         ui = ActivityInsightsBinding.inflate(layoutInflater)
         setContentView(ui.root)
 
+        GamificationManager.onInsightsViewed(this)
+
         backButton = findViewById(R.id.backButton)
         backButton.setOnClickListener {
             startActivity(Intent(this, DashboardActivity::class.java))
