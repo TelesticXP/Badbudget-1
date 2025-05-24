@@ -76,9 +76,10 @@
 
             <!-- Daily streak -->
             <TextView
+                android:id="@+id/textStreak"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="\uD83D\uDD25 12-day streak!"
+                android:text="\uD83D\uDD25 0-day streak!"
                 android:textStyle="bold"
                 android:textSize="16sp" />
 
@@ -148,10 +149,11 @@
 
             <!-- Badge -->
             <TextView
+                android:id="@+id/textBadges"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="First Budget Set!"
+                android:text=""
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -169,21 +171,24 @@
 
 
                 <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/progressPoints"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:indeterminate="false"
                     app:indicatorSize="120dp"
                     app:trackThickness="12dp"
-                    android:progress="70"
+                    android:progress="0"
                     android:layout_marginStart="16dp" />
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="140dp"
-                android:layout_height="62dp"
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:contentDescription="Star rating"
-                android:src="@drawable/ic_stars" />
+                android:isIndicator="true"
+                android:numStars="5"
+                android:stepSize="1" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
