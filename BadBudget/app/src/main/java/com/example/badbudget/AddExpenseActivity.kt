@@ -173,7 +173,7 @@ class AddExpenseActivity : AppCompatActivity() {
                 }
             }
 
-            // Build Expense data class
+            // expense data class
             val expense = Expense(
                 amount = amount,
                 category = category,
