@@ -36,6 +36,7 @@ object GamificationManager {
                 loginStreak = newStreak,
                 points = points,
                 badges = badges
+              
             val updated = (current ?: GamificationStats(userId = userId)).copy(
                 lastLoginDate = today.format(DateTimeFormatter.ISO_DATE),
                 loginStreak = newStreak,
