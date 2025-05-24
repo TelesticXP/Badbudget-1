@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import android.widget.TextView
-import android.widget.RatingBar
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.example.badbudget.R.id
 
@@ -50,21 +48,6 @@ class AwardsActivity : AppCompatActivity() {
             medalBudget.setImageResource(if (s.badges.contains("first_budget")) R.drawable.gold else R.drawable.silver)
             medalExpense.setImageResource(if (s.badges.contains("first_expense")) R.drawable.gold else R.drawable.silver)
             medalStreak.setImageResource(if (s.badges.contains("streak_7")) R.drawable.gold else R.drawable.silver)
-
-    private fun loadStats() {
-        val uid = UserSession.id(this)
-        FirestoreService.getStats(uid) { stats ->
-            val s = stats ?: return@getStats
-            textStreak.text = "\uD83D\uDD25 ${s.loginStreak}-day streak!"
-            textBadges.text = s.badges.joinToString(", ")
-            progressPoints.progress = s.points.coerceAtMost(100)
-            ratingBar.rating = when {
-                s.points >= 80 -> 5f
-                s.points >= 60 -> 4f
-                s.points >= 40 -> 3f
-                s.points >= 20 -> 2f
-                else -> 1f
-            }
         }
     }
 }

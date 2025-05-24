@@ -149,10 +149,6 @@
                     android:progress="0"
                     app:indicatorSize="120dp"
                     app:trackThickness="12dp"
-                    app:max="100"
-                    app:indicatorSize="120dp"
-                    app:trackThickness="12dp"
-                    android:progress="0"
                     android:layout_marginStart="16dp" />
             </LinearLayout>
 

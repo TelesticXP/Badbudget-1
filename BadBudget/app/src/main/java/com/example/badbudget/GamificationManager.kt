@@ -35,13 +35,7 @@ object GamificationManager {
                 lastLoginDate = today.format(DateTimeFormatter.ISO_DATE),
                 loginStreak = newStreak,
                 points = points,
-                badges = badges
-              
-            val updated = (current ?: GamificationStats(userId = userId)).copy(
-                lastLoginDate = today.format(DateTimeFormatter.ISO_DATE),
-                loginStreak = newStreak,
-                points = (current?.points ?: 0) + 1
-            )
+                badges = badges)
             FirestoreService.saveStats(updated){}
         }
     }
