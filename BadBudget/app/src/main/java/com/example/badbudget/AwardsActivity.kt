@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import android.widget.TextView
+import android.widget.RatingBar
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.example.badbudget.R.id
 
@@ -16,6 +18,7 @@ class AwardsActivity : AppCompatActivity() {
     private lateinit var medalBudget: ImageView
     private lateinit var medalExpense: ImageView
     private lateinit var medalStreak: ImageView
+    private lateinit var textBadges: TextView
     private lateinit var progressPoints: CircularProgressIndicator
     private lateinit var ratingBar: RatingBar
 
@@ -27,6 +30,7 @@ class AwardsActivity : AppCompatActivity() {
         medalBudget = findViewById(R.id.medalBudget)
         medalExpense = findViewById(R.id.medalExpense)
         medalStreak = findViewById(R.id.medalStreak)
+        textBadges = findViewById(R.id.textBadges)
         progressPoints = findViewById(R.id.progressPoints)
         ratingBar = findViewById(R.id.ratingBar)
 
@@ -47,6 +51,12 @@ class AwardsActivity : AppCompatActivity() {
             medalExpense.setImageResource(if (s.badges.contains("first_expense")) R.drawable.gold else R.drawable.silver)
             medalStreak.setImageResource(if (s.badges.contains("streak_7")) R.drawable.gold else R.drawable.silver)
 
+    private fun loadStats() {
+        val uid = UserSession.id(this)
+        FirestoreService.getStats(uid) { stats ->
+            val s = stats ?: return@getStats
+            textStreak.text = "\uD83D\uDD25 ${s.loginStreak}-day streak!"
+            textBadges.text = s.badges.joinToString(", ")
             progressPoints.progress = s.points.coerceAtMost(100)
             ratingBar.rating = when {
                 s.points >= 80 -> 5f
