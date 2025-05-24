@@ -72,7 +72,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
             <!-- Daily streak -->
             <TextView
@@ -83,68 +84,37 @@
                 android:textStyle="bold"
                 android:textSize="16sp" />
 
-            <!-- Calendar -->
-            <ImageView
-                android:id="@+id/imgCalendar"
-                android:layout_width="180dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/calendar"
-                android:contentDescription="Calendar streak" />
-
             <!-- Medals -->
             <LinearLayout
+                android:id="@+id/layoutMedals"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:layout_marginTop="24dp">
 
-                <ImageButton
-                    style="?attr/borderlessButtonStyle"
-                    android:id="@+id/btnPrevMedals"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_chevron_left_24"
-                    android:contentDescription="Previous" />
+                <ImageView
+                    android:id="@+id/medalBudget"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/silver"
+                    android:contentDescription="Budget medal" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_marginHorizontal="8dp">
+                <ImageView
+                    android:id="@+id/medalExpense"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="12dp"
+                    android:src="@drawable/silver"
+                    android:contentDescription="Expense medal" />
 
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:src="@drawable/gold"
-                        android:contentDescription="Gold medal" />
-
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="12dp"
-                        android:src="@drawable/silver"
-                        android:contentDescription="Silver medal" />
-
-                    <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="12dp"
-                        android:alpha="0.3"
-                        android:src="@drawable/silver"
-                        android:contentDescription="Locked medal" />
-                </LinearLayout>
-
-                <ImageButton
-                    style="?attr/borderlessButtonStyle"
-                    android:id="@+id/btnNextMedals"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_chevron_right_24"
-                    android:contentDescription="Next" />
+                <ImageView
+                    android:id="@+id/medalStreak"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="12dp"
+                    android:src="@drawable/silver"
+                    android:contentDescription="Streak medal" />
             </LinearLayout>
 
             <!-- Badge -->
@@ -179,6 +149,10 @@
                     android:progress="0"
                     app:indicatorSize="120dp"
                     app:trackThickness="12dp"
+                    app:max="100"
+                    app:indicatorSize="120dp"
+                    app:trackThickness="12dp"
+                    android:progress="0"
                     android:layout_marginStart="16dp" />
             </LinearLayout>
 
