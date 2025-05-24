@@ -3,11 +3,8 @@ package com.example.badbudget
 import com.example.badbudget.models.Budget
 import com.example.badbudget.models.Category
 import com.example.badbudget.models.Expense
-import com.example.badbudget.models.UserStats
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 object FirestoreService {
     private val db = Firebase.firestore

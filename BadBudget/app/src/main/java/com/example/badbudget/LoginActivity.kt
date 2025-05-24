@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+
     private lateinit var editTextUsername: EditText
     private lateinit var editTextPassword: EditText
     private lateinit var checkBoxRememberMe: CheckBox
@@ -49,8 +50,6 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
                         val uid = auth.currentUser?.uid ?: ""
                         UserSession.init(this, uid)
-                        StatisticsService.recordLogin(uid) { stats ->
-                        }
                         startActivity(Intent(this, DashboardActivity::class.java))
                         finish()
                     } else {

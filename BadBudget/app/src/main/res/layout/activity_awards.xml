@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/awardsRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -12,14 +11,12 @@
     <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headerContainer"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#5e17eb"
         android:paddingBottom="16dp"
         android:paddingTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- Back button -->
         <ImageView
@@ -64,7 +61,7 @@
     <!-- Content -->
     <ScrollView
         android:id="@+id/scrollContent"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="16dp"
         app:layout_constraintTop_toBottomOf="@id/headerContainer"
@@ -79,14 +76,13 @@
 
             <!-- Daily streak -->
             <TextView
-                android:id="@+id/textViewStreak"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🔥 0-day streak!"
+                android:text="\uD83D\uDD25 12-day streak!"
                 android:textStyle="bold"
                 android:textSize="16sp" />
 
-            <!-- Calendar placeholder -->
+            <!-- Calendar -->
             <ImageView
                 android:id="@+id/imgCalendar"
                 android:layout_width="180dp"
@@ -95,12 +91,12 @@
                 android:src="@drawable/calendar"
                 android:contentDescription="Calendar streak" />
 
-            <!-- Medals row -->
+            <!-- Medals -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center"
+                android:gravity="center_vertical"
                 android:layout_marginTop="24dp">
 
                 <ImageButton
@@ -120,14 +116,12 @@
                     android:layout_marginHorizontal="8dp">
 
                     <ImageView
-                        android:id="@+id/imgMedalGold"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:src="@drawable/gold"
                         android:contentDescription="Gold medal" />
 
                     <ImageView
-                        android:id="@+id/imgMedalSilver"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginStart="12dp"
@@ -135,7 +129,6 @@
                         android:contentDescription="Silver medal" />
 
                     <ImageView
-                        android:id="@+id/imgMedalBronze"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginStart="12dp"
@@ -153,16 +146,14 @@
                     android:contentDescription="Next" />
             </LinearLayout>
 
-            <!-- Current Badge -->
+            <!-- Badge -->
             <TextView
-                android:id="@+id/textViewBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="No badge yet"
+                android:text="First Budget Set!"
                 android:textSize="14sp" />
 
-            <!-- Points Progress & Star Rating -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -170,26 +161,29 @@
                 android:gravity="center"
                 android:layout_marginTop="32dp">
 
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/avatar"
+                    android:contentDescription="Achievement mascot" />
+
+
                 <com.google.android.material.progressindicator.CircularProgressIndicator
-                    android:id="@+id/progressIndicator"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:indeterminate="false"
                     app:indicatorSize="120dp"
                     app:trackThickness="12dp"
-                    android:progress="0"
-                    android:max="500" />
-
-                <!-- Star container -->
-                <LinearLayout
-                    android:id="@+id/starContainer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="16dp"
-                    android:gravity="center" />
+                    android:progress="70"
+                    android:layout_marginStart="16dp" />
             </LinearLayout>
 
+            <ImageView
+                android:layout_width="140dp"
+                android:layout_height="62dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="Star rating"
+                android:src="@drawable/ic_stars" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

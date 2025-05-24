@@ -22,7 +22,7 @@ class ExpenseHistoryActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_expense_history)
 
-        // back button
+        // Back arrow
         backButton = findViewById(R.id.backButton)
         backButton.setOnClickListener {
             finish()
@@ -40,7 +40,7 @@ class ExpenseHistoryActivity : AppCompatActivity(),
             startActivity(Intent(this, AddExpenseActivity::class.java))
         }
 
-        // period picker
+        // Period picker
         val today = LocalDate.now()
         val initRange = PeriodPickerHelper.Range(
             start = today.minusDays(7).toString(),
