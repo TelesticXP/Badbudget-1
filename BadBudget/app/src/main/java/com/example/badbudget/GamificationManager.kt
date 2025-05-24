@@ -23,6 +23,19 @@ object GamificationManager {
                 lastDate == today -> current!!.loginStreak
                 else -> 1
             }
+
+            var badges = current?.badges ?: emptyList()
+            var points = (current?.points ?: 0) + 1
+            if (newStreak >= 7 && !badges.contains("streak_7")) {
+                badges = badges + "streak_7"
+                points += 15
+            }
+
+            val updated = (current ?: GamificationStats(userId = userId)).copy(
+                lastLoginDate = today.format(DateTimeFormatter.ISO_DATE),
+                loginStreak = newStreak,
+                points = points,
+                badges = badges
             val updated = (current ?: GamificationStats(userId = userId)).copy(
                 lastLoginDate = today.format(DateTimeFormatter.ISO_DATE),
                 loginStreak = newStreak,
