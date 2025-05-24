@@ -106,4 +106,23 @@ object FirestoreService {
             .addOnSuccessListener { onComplete(true) }
             .addOnFailureListener { onComplete(false) }
     }
+
+    // ─── Gamification stats ────────────────────────────────────────────
+    fun getStats(userId: String, callback: (com.example.badbudget.models.GamificationStats?) -> Unit) {
+        db.collection("stats")
+            .document(userId)
+            .get()
+            .addOnSuccessListener { snap ->
+                callback(snap.toObject(com.example.badbudget.models.GamificationStats::class.java))
+            }
+            .addOnFailureListener { callback(null) }
+    }
+
+    fun saveStats(stats: com.example.badbudget.models.GamificationStats, onComplete: (Boolean) -> Unit) {
+        db.collection("stats")
+            .document(stats.userId)
+            .set(stats)
+            .addOnSuccessListener { onComplete(true) }
+            .addOnFailureListener { onComplete(false) }
+    }
 }
