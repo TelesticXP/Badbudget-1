@@ -188,6 +188,7 @@ class AddExpenseActivity : AppCompatActivity() {
             FirestoreService.addExpense(expense) { success ->
                 if (success) {
                     Toast.makeText(this, "Expense added!", Toast.LENGTH_SHORT).show()
+                    GamificationManager.onExpenseLogged(this)
                     GamificationManager.onExpenseLogged(this, savedPath != null)
                     finish()
                 } else {
