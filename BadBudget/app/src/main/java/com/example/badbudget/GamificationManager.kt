@@ -2,11 +2,8 @@ package com.example.badbudget
 
 import android.content.Context
 import com.example.badbudget.models.GamificationStats
-import com.google.firebase.firestore.ktx.toObject
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-
-object GamificationManager {
 
 object GamificationManager {
 
@@ -37,23 +34,8 @@ object GamificationManager {
         if (userId.isBlank()) return
 
         FirestoreService.getStats(userId) { current ->
-            val today = LocalDate.now()
-            val lastDate = current?.lastLoginDate?.let {
-                runCatching { LocalDate.parse(it) }.getOrNull()
-            }
-            val newStreak = when {
-                lastDate == null -> 1
-                lastDate.plusDays(1) == today -> current!!.loginStreak + 1
-                lastDate == today -> current!!.loginStreak
-                else -> 1
-            }
-            val updated = (current ?: GamificationStats(userId = userId)).copy(
-                lastLoginDate = today.format(DateTimeFormatter.ISO_DATE),
-                loginStreak = newStreak,
-                points = (current?.points ?: 0) + 1
-            )
-            FirestoreService.saveStats(updated){}
             var stats = resetIfNeeded(current?.copy(userId = userId))
+
             val today = LocalDate.now()
             val lastDate = stats.lastLoginDate.takeIf { it.isNotEmpty() }?.let {
                 runCatching { LocalDate.parse(it) }.getOrNull()
@@ -67,7 +49,7 @@ object GamificationManager {
             }
 
             var weekStreaks = stats.weekStreaks
-            var points = stats.points
+            var points = stats.points + 1
             val earnedWeeks = newStreak / 7
             if (earnedWeeks > weekStreaks) {
                 val add = earnedWeeks - weekStreaks
@@ -95,7 +77,11 @@ object GamificationManager {
     }
 
     fun onBudgetAdded(context: Context) {
-        updateBadge(context, "first_budget", 10)
+        val uid = UserSession.id(context)
+        FirestoreService.getBudgets(uid) { list ->
+            if (list.isNotEmpty()) updateBadge(context, "first_budget")
+            if (list.size >= 5) updateBadge(context, "five_budgets")
+        }
     }
 
     fun onExpenseLogged(context: Context) {
@@ -112,11 +98,8 @@ object GamificationManager {
                     badges = stats.badges + badge,
                     points = stats.points + pts
                 )
-                FirestoreService.saveStats(updated){}
-        val uid = UserSession.id(context)
-        FirestoreService.getBudgets(uid) { list ->
-            if (list.isNotEmpty()) updateBadge(context, "first_budget")
-            if (list.size >= 5) updateBadge(context, "five_budgets")
+                FirestoreService.saveStats(updated) {}
+            }
         }
     }
 
