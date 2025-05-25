@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
                         val uid = auth.currentUser?.uid ?: ""
                         UserSession.init(this, uid)
                         GamificationManager.recordLogin(this)
-                        startActivity(Intent(this, DashboardActivity::class.java))
+                        startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
                         Toast.makeText(this, "Invalid credentials.", Toast.LENGTH_SHORT).show()
