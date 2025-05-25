@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.RatingBar
+import android.widget.Toast
 import com.example.badbudget.R
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.example.badbudget.R.id
@@ -14,7 +15,6 @@ class AwardsActivity : AppCompatActivity() {
 
     private lateinit var backButton: ImageView
     private lateinit var textStreak: TextView
-    private lateinit var textBadges: TextView
     private lateinit var progressPoints: CircularProgressIndicator
     private lateinit var ratingBar: RatingBar
     private lateinit var avatarView: ImageView
@@ -29,13 +29,22 @@ class AwardsActivity : AppCompatActivity() {
         "five_categories",
         "insights_viewer"
     )
+    private val badgeNames = mapOf(
+        "first_budget" to "First Budget",
+        "first_expense" to "First Expense",
+        "five_budgets" to "Five Budgets",
+        "ten_expenses" to "Ten Expenses",
+        "receipt_keeper" to "Receipt Keeper",
+        "first_category" to "First Category",
+        "five_categories" to "Five Categories",
+        "insights_viewer" to "Insights Viewer"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_awards)
         backButton = findViewById(id.backButton)
         textStreak = findViewById(R.id.textStreak)
-        textBadges = findViewById(R.id.textBadges)
         progressPoints = findViewById(R.id.progressPoints)
         ratingBar = findViewById(R.id.ratingBar)
         avatarView = findViewById(R.id.imageAvatar)
@@ -62,7 +71,6 @@ class AwardsActivity : AppCompatActivity() {
         FirestoreService.getStats(uid) { stats ->
             val s = stats ?: return@getStats
             textStreak.text = "\uD83D\uDD25 ${s.loginStreak}-day streak!"
-            textBadges.text = s.badges.joinToString(", ")
             progressPoints.progress = s.points.coerceAtMost(100)
             ratingBar.rating = when {
                 s.points >= 80 -> 5f
@@ -84,6 +92,10 @@ class AwardsActivity : AppCompatActivity() {
                 val img = medals.getOrNull(index) ?: return@forEachIndexed
                 val res = if (s.badges.contains(key)) R.drawable.gold else R.drawable.silver
                 img.setImageResource(res)
+                img.setOnClickListener {
+                    val name = badgeNames[key] ?: key.replaceFirstChar { it.uppercase() }.replace("_", " ")
+                    Toast.makeText(this, name, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
