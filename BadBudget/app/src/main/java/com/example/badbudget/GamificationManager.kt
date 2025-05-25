@@ -21,6 +21,8 @@ import java.time.format.DateTimeFormatter
 object GamificationManager {
     // number of points awarded per badge and streak totalling to 100
     private const val WEEK_POINTS = 5 // login streaks
+
+    private const val WEEK_POINTS = 5
     private val BADGE_POINTS = mapOf(
         "first_budget" to 10,
         "first_expense" to 10,
@@ -48,6 +50,7 @@ object GamificationManager {
 
         FirestoreService.getStats(userId) { current ->
             var stats = resetIfNeeded(current?.copy(userId = userId))
+
             val today = LocalDate.now()
             val lastDate = stats.lastLoginDate.takeIf { it.isNotEmpty() }?.let {
                 runCatching { LocalDate.parse(it) }.getOrNull()
