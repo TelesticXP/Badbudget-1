@@ -1,3 +1,17 @@
+/*
+References:
+
+1. Create dynamic lists with RecyclerView
+   Author: Android Developers
+   Date: May 20, 2025
+   URL: https://developer.android.com/develop/ui/views/layout/recyclerview
+
+2. Title: Intents and intent filters
+   Author: Android Developers
+   Date: May 20, 2025
+   URL: https://developer.android.com/guide/components/intents-filters
+*/
+
 package com.example.badbudget
 
 import BudgetAdapter
@@ -33,11 +47,11 @@ class BudgetsActivity : AppCompatActivity() {
 
         // form fields
         editTextBudgetCategory = findViewById(R.id.editTextBudgetCategory)
-        editTextBudgetMin      = findViewById(R.id.editTextBudgetMin)
-        editTextBudgetMax      = findViewById(R.id.editTextBudgetMax)
-        buttonAddBudget        = findViewById(R.id.buttonAddBudget)
+        editTextBudgetMin = findViewById(R.id.editTextBudgetMin)
+        editTextBudgetMax = findViewById(R.id.editTextBudgetMax)
+        buttonAddBudget = findViewById(R.id.buttonAddBudget)
 
-        // RecyclerView + adapter
+        // RecyclerView and adapter
         recyclerView = findViewById(R.id.recyclerViewBudgets)
         adapter = BudgetAdapter(emptyList()) { budget ->
             showEditDialog(budget)
@@ -75,7 +89,7 @@ class BudgetsActivity : AppCompatActivity() {
                 if (success) {
                     Toast.makeText(this, "Budget saved", Toast.LENGTH_SHORT).show()
                     GamificationManager.onBudgetAdded(this)
-                    // clear inputs
+                    // clear input
                     editTextBudgetCategory.text.clear()
                     editTextBudgetMin.text.clear()
                     editTextBudgetMax.text.clear()
@@ -88,8 +102,17 @@ class BudgetsActivity : AppCompatActivity() {
     }
 
     private fun loadBudgets() {
-        FirestoreService.getBudgets(UserSession.id(this)) { list ->
-            adapter.setBudgets(list)
+        val uid = UserSession.id(this)
+        FirestoreService.getBudgets(uid) { budgets ->
+            FirestoreService.getExpenses(uid) { expenses ->
+                val spentMap = expenses
+                    .groupBy { it.category }
+                    .mapValues { it.value.sumOf { e -> e.amount } }
+                val withSpent = budgets.map { b ->
+                    b.copy(spentAmount = spentMap[b.category] ?: 0.0)
+                }
+                adapter.setBudgets(withSpent)
+            }
         }
     }
 
@@ -113,7 +136,7 @@ class BudgetsActivity : AppCompatActivity() {
                 val newMax = max.text.toString().toDoubleOrNull() ?: 0.0
 
                 val updated = budget.copy(
-                    category  = newCat,
+                    category = newCat,
                     minAmount = newMin,
                     maxAmount = newMax
                 )

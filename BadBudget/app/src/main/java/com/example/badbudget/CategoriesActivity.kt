@@ -20,15 +20,9 @@ class CategoriesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_categories)
 
-        // Back arrow
-        backButton = findViewById(R.id.backButton)
-        backButton.setOnClickListener {
-            finish()  // or navigate to wherever makes sense
-        }
-
-        // RecyclerView + adapter
+        // RecyclerView
         adapter = CategoryAdapter { category ->
-            // delete by Firestore document ID
+            // delete by document ID
             FirestoreService.deleteCategory(category.id) { success ->
                 if (success) {
                     Toast.makeText(this, "Category removed", Toast.LENGTH_SHORT).show()
@@ -43,7 +37,7 @@ class CategoriesActivity : AppCompatActivity() {
             adapter = this@CategoriesActivity.adapter
         }
 
-        // FAB to add new
+        // FAB
         findViewById<FloatingActionButton>(R.id.fabAddCategory)
             .setOnClickListener { showAddDialog() }
 
@@ -66,7 +60,7 @@ class CategoriesActivity : AppCompatActivity() {
                 val name = input.text.toString().trim()
                 if (name.isNotEmpty()) {
                     val newCat = Category(
-                        id = "",               // empty → Firestore will generate
+                        id = "",
                         name = name,
                         userId = UserSession.id(this)
                     )

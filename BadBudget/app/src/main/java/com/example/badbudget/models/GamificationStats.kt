@@ -1,9 +1,7 @@
 package com.example.badbudget.models
-
+// GameificationStats data class
 data class GamificationStats(
     val userId: String = "",
-    val lastLoginDate: String = "",
-    val loginStreak: Int = 0,
     val monthKey: String = "",
     val lastLoginDate: String = "",
     val loginStreak: Int = 0,

@@ -33,13 +33,13 @@ class RegisterActivity : AppCompatActivity() {
         buttonCreateAccount     = findViewById(R.id.buttonCreateAccount)
         textViewBackToLogin     = findViewById(R.id.textViewBackToLogin)
 
-        // Back arrow
+        // back button
         backButton.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
 
-        // Create Account
+        // create account button
         buttonCreateAccount.setOnClickListener {
             val username = editTextUsername.text.toString().trim()
             val email    = editTextEmail.text.toString().trim()
@@ -62,7 +62,7 @@ class RegisterActivity : AppCompatActivity() {
                         .addOnCompleteListener { task ->
                             buttonCreateAccount.isEnabled = true
                             if (task.isSuccessful) {
-                                // Display name
+                                // display name
                                 auth.currentUser?.updateProfile(
                                     UserProfileChangeRequest.Builder()
                                         .setDisplayName(username)
@@ -83,7 +83,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        // Back to login screen
+        // back to login screen
         textViewBackToLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()

@@ -1,3 +1,23 @@
+/*
+References:
+
+1. Title: DatePickerDialog reference
+   Author: Android Developers
+   Date: February 10, 2025
+   URL: https://developer.android.com/reference/android/app/DatePickerDialog
+
+2. Title: TimePickerDialog reference
+   Author: Android Developers
+   Date: February 10, 2025
+   URL: https://developer.android.com/reference/android/app/TimePickerDialog
+
+5. Title: ArrayAdapter reference
+   Author: Android Developers
+   Date: February 10, 2025
+   URL: https://developer.android.com/reference/android/widget/ArrayAdapter
+*/
+
+
 package com.example.badbudget
 
 import android.app.DatePickerDialog
@@ -70,18 +90,18 @@ class AddExpenseActivity : AppCompatActivity() {
         }
 
         // form views
-        editTextAmount           = findViewById(R.id.editTextAmount)
-        spinnerCategory          = findViewById(R.id.spinnerCategory)
-        buttonSelectDate         = findViewById(R.id.buttonSelectDate)
-        buttonSelectStartTime    = findViewById(R.id.buttonSelectStartTime)
-        buttonSelectEndTime      = findViewById(R.id.buttonSelectEndTime)
-        textViewSelectedDate     = findViewById(R.id.textViewSelectedDate)
-        textViewSelectedStartTime= findViewById(R.id.textViewSelectedStartTime)
-        textViewSelectedEndTime  = findViewById(R.id.textViewSelectedEndTime)
-        editTextDescription      = findViewById(R.id.editTextDescription)
-        buttonUploadReceipt      = findViewById(R.id.buttonUploadReceipt)
-        imageViewReceiptPreview  = findViewById(R.id.imageViewReceiptPreview)
-        buttonLogExpense         = findViewById(R.id.buttonLogExpense)
+        editTextAmount = findViewById(R.id.editTextAmount)
+        spinnerCategory = findViewById(R.id.spinnerCategory)
+        buttonSelectDate = findViewById(R.id.buttonSelectDate)
+        buttonSelectStartTime = findViewById(R.id.buttonSelectStartTime)
+        buttonSelectEndTime = findViewById(R.id.buttonSelectEndTime)
+        textViewSelectedDate = findViewById(R.id.textViewSelectedDate)
+        textViewSelectedStartTime = findViewById(R.id.textViewSelectedStartTime)
+        textViewSelectedEndTime = findViewById(R.id.textViewSelectedEndTime)
+        editTextDescription = findViewById(R.id.editTextDescription)
+        buttonUploadReceipt = findViewById(R.id.buttonUploadReceipt)
+        imageViewReceiptPreview = findViewById(R.id.imageViewReceiptPreview)
+        buttonLogExpense= findViewById(R.id.buttonLogExpense)
 
         // populate spinner
         FirestoreService.getBudgets(UserSession.id(this)) { budgets ->
@@ -173,7 +193,7 @@ class AddExpenseActivity : AppCompatActivity() {
                 }
             }
 
-            // Build Expense data class
+            // create Expense class
             val expense = Expense(
                 amount = amount,
                 category = category,

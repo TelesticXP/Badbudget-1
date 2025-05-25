@@ -1,3 +1,38 @@
+/*
+References:
+
+1. Title: Create dynamic lists with RecyclerView
+   Author: Android Developers
+   Date: May 20, 2025
+   URL: https://developer.android.com/develop/ui/views/layout/recyclerview
+
+2. Title: Intents and intent filters
+   Author: Android Developers
+   Date: May 20, 2025
+   URL: https://developer.android.com/guide/components/intents-filters
+
+3. Title: Generated binding classes
+   Author: Android Developers
+   Date: February 11, 2025
+   URL: https://developer.android.com/topic/libraries/data-binding/generated-binding
+
+4. Title: Kotlin: Using Firebase Firestore for Data Storage and Retrieval
+   Author: Sling Academy
+   Date: December 5, 2024
+   URL: https://www.slingacademy.com/article/kotlin-using-firebase-firestore-for-data-storage-and-retrieval/
+
+5. Title: Android – Create a Pie Chart with Kotlin
+   Author: GeeksforGeeks
+   Date: May 31, 2024
+   URL: https://www.geeksforgeeks.org/android-create-a-pie-chart-with-kotlin/
+
+6. Title: MPAndroidChart: A powerful Android chart view library
+   Author: Philipp Jahoda
+   Date: March 20, 2019
+   URL: https://github.com/PhilJay/MPAndroidChart
+*/
+
+
 package com.example.badbudget
 
 import android.content.Intent
@@ -111,7 +146,7 @@ class DashboardActivity : AppCompatActivity() {
             when {
                 spent < b.minAmount -> under++
                 spent > b.maxAmount -> over++
-                else                 -> onTrack++
+                else -> onTrack++
             }
         }
 
@@ -120,9 +155,9 @@ class DashboardActivity : AppCompatActivity() {
             PieEntry(onTrack.toFloat(), "On Track"),
             PieEntry(over.toFloat(), "Over Max")
         )
-        val grey  = ContextCompat.getColor(this, R.color.chartGrey)
+        val grey = ContextCompat.getColor(this, R.color.chartGrey)
         val green = ContextCompat.getColor(this, android.R.color.holo_green_light)
-        val red   = ContextCompat.getColor(this, android.R.color.holo_red_light)
+        val red = ContextCompat.getColor(this, android.R.color.holo_red_light)
 
         val ds = PieDataSet(entries, "").apply {
             setDrawValues(false)

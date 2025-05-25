@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <!-- Purple header (logo + back) -->
+    <!-- Header-->
     <View
         android:id="@+id/topBackground"
         android:layout_width="0dp"
@@ -91,7 +91,7 @@
                     android:text="Yearly"/>
             </com.google.android.material.button.MaterialButtonToggleGroup>
 
-            <!-- LINE CHART -->
+            <!-- Line chart -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="8dp"/>
 
-            <!-- GROUPED BAR CHART -->
+            <!-- Bar chart -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

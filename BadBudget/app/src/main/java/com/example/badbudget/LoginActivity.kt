@@ -1,3 +1,28 @@
+/*
+References:
+
+1. Title: Authenticate with Firebase using Password-Based Accounts on Android
+   Author: Firebase
+   Date: May 23, 2023
+   URL: https://firebase.google.com/docs/auth/android/password-auth
+
+2. Title: FirebaseAuth reference
+   Author: Firebase
+   Date: April 30, 2024
+   URL: https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuth
+
+3. Title: Toasts overview
+   Author: Android Developers
+   Date: January 3, 2024
+   URL: https://developer.android.com/guide/topics/ui/notifiers/toasts
+
+4. Title: Intents and intent filters
+   Author: Android Developers
+   Date: May 20, 2025
+   URL: https://developer.android.com/guide/components/intents-filters
+*/
+
+
 package com.example.badbudget
 
 import android.content.Intent
@@ -23,18 +48,16 @@ class LoginActivity : AppCompatActivity() {
 
         // Firebase Auth instance
         auth = FirebaseAuth.getInstance()
-
-        // Initialize Views
-        editTextUsername       = findViewById(R.id.editTextUsername)
-        editTextPassword       = findViewById(R.id.editTextPassword)
-        checkBoxRememberMe     = findViewById(R.id.checkboxRememberMe)
-        buttonLogin            = findViewById(R.id.buttonLogin)
+        editTextUsername = findViewById(R.id.editTextUsername)
+        editTextPassword = findViewById(R.id.editTextPassword)
+        checkBoxRememberMe = findViewById(R.id.checkboxRememberMe)
+        buttonLogin = findViewById(R.id.buttonLogin)
         textViewForgotPassword = findViewById(R.id.textViewForgotPassword)
-        textViewCreateAccount  = findViewById(R.id.textViewCreateAccount)
+        textViewCreateAccount = findViewById(R.id.textViewCreateAccount)
 
-        // Login button click
+        // login button click
         buttonLogin.setOnClickListener {
-            val email    = editTextUsername.text.toString().trim()
+            val email = editTextUsername.text.toString().trim()
             val password = editTextPassword.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty()) {
@@ -59,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
                 }
         }
 
-        // Forgot password link
+        // forgot password link
         textViewForgotPassword.setOnClickListener {
             val email = editTextUsername.text.toString().trim()
             if (email.isEmpty()) {
@@ -75,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // Create new account link
+        // create new account link
         textViewCreateAccount.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }

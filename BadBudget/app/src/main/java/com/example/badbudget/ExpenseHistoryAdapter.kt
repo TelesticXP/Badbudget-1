@@ -27,11 +27,11 @@ class ExpenseHistoryAdapter(private val cb: Callback)
         private val tvCat: TextView = v.findViewById(R.id.tvCat)
         private val tvAmt: TextView = v.findViewById(R.id.tvAmt)
         private val tvDate: TextView = v.findViewById(R.id.tvDate)
-        private val img: ImageView  = v.findViewById(R.id.imgThumb)
+        private val img: ImageView = v.findViewById(R.id.imgThumb)
 
         fun bind(e: Expense) {
-            tvCat.text  = e.category
-            tvAmt.text  = "R${e.amount}"
+            tvCat.text = e.category
+            tvAmt.text = "R${e.amount}"
             tvDate.text = e.date
 
             if (e.receiptPath != null) {

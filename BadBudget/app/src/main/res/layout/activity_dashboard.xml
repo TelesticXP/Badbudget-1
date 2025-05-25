@@ -43,7 +43,7 @@
         android:layout_marginTop="36dp"
         android:layout_marginStart="16dp" />
 
-    <!-- Top App Bar -->
+    <!-- Top bar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/topAppBar"
         style="@style/Widget.Material3.Toolbar"

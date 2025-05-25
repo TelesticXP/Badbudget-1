@@ -1,5 +1,5 @@
 package com.example.badbudget.models
-
+// expense data class
 data class Expense(
     val id: String = "",
     val amount: Double = 0.0,

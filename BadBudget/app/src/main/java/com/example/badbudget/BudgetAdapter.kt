@@ -13,9 +13,9 @@ class BudgetAdapter(
 
     inner class BudgetViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewCategory: TextView = itemView.findViewById(R.id.textViewCategory)
-        val textViewMin:      TextView = itemView.findViewById(R.id.textViewMin)
-        val textViewMax:      TextView = itemView.findViewById(R.id.textViewMax)
-        val textViewSpent:    TextView = itemView.findViewById(R.id.textViewSpent)
+        val textViewMin: TextView = itemView.findViewById(R.id.textViewMin)
+        val textViewMax: TextView = itemView.findViewById(R.id.textViewMax)
+        val textViewSpent: TextView = itemView.findViewById(R.id.textViewSpent)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BudgetViewHolder {
@@ -28,9 +28,9 @@ class BudgetAdapter(
         val budget = budgets[position]
 
         holder.textViewCategory.text = budget.category
-        holder.textViewMin.text      = "Min: R${budget.minAmount}"
-        holder.textViewMax.text      = "Max: R${budget.maxAmount}"
-        holder.textViewSpent.text    = "Spent: R${budget.spentAmount}"
+        holder.textViewMin.text = "Min: R${budget.minAmount}"
+        holder.textViewMax.text = "Max: R${budget.maxAmount}"
+        holder.textViewSpent.text = "Spent: R${budget.spentAmount}"
 
         holder.itemView.setOnClickListener {
             onItemClick(budget)

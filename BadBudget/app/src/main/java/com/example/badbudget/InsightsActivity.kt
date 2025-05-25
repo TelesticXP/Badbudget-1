@@ -34,9 +34,9 @@ class InsightsActivity : AppCompatActivity() {
         ui.groupPeriod.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (!isChecked) return@addOnButtonCheckedListener
             val p = when (checkedId) {
-                ui.btnWeekly.id  -> Period.WEEK
-                ui.btnYearly.id  -> Period.YEAR
-                else             -> Period.MONTH
+                ui.btnWeekly.id -> Period.WEEK
+                ui.btnYearly.id -> Period.YEAR
+                else -> Period.MONTH
             }
             loadCharts(p)
         }
@@ -95,32 +95,32 @@ class InsightsActivity : AppCompatActivity() {
 
         // pick all categories that user has a budget for
         val cats = budgets.map { it.category }
-        val minEntries   = mutableListOf<BarEntry>()
+        val minEntries = mutableListOf<BarEntry>()
         val spentEntries = mutableListOf<BarEntry>()
-        val maxEntries   = mutableListOf<BarEntry>()
+        val maxEntries = mutableListOf<BarEntry>()
 
         cats.forEachIndexed { i, cat ->
             val b = budgets.first { it.category == cat }
             val spent = spentMap[cat] ?: 0.0
-            minEntries  .add(BarEntry(i.toFloat(), b.minAmount.toFloat()))
+            minEntries.add(BarEntry(i.toFloat(), b.minAmount.toFloat()))
             spentEntries.add(BarEntry(i.toFloat(), spent.toFloat()))
-            maxEntries  .add(BarEntry(i.toFloat(), b.maxAmount.toFloat()))
+            maxEntries.add(BarEntry(i.toFloat(), b.maxAmount.toFloat()))
         }
 
-        val dsMin   = BarDataSet(minEntries, "Min Goal")
+        val dsMin = BarDataSet(minEntries, "Min Goal")
         val dsSpent = BarDataSet(spentEntries, "Spent")
-        val dsMax   = BarDataSet(maxEntries, "Max Goal")
+        val dsMax = BarDataSet(maxEntries, "Max Goal")
 
         // chart colors
-        dsMin.color   = getColor(R.color.chartGrey)
+        dsMin.color = getColor(R.color.chartGrey)
         dsSpent.color = getColor(R.color.chartPurple)
-        dsMax.color   = getColor(R.color.teal_700)
+        dsMax.color = getColor(R.color.teal_700)
 
         val data = BarData(dsMin, dsSpent, dsMax)
         val groupCount = cats.size
-        val barSpace   = 0.05f
+        val barSpace = 0.05f
         val groupSpace = 0.3f
-        val barWidth   = (1f - groupSpace) / 3f - barSpace
+        val barWidth = (1f - groupSpace) / 3f - barSpace
 
         data.barWidth = barWidth
 
@@ -145,11 +145,11 @@ class InsightsActivity : AppCompatActivity() {
             invalidate()
         }
     }
-
+    // period picker
     private enum class Period {
         WEEK, MONTH, YEAR;
         fun bounds(): Pair<String,String> {
-            val end   = LocalDate.now()
+            val end = LocalDate.now()
             val start = when(this){
                 WEEK  -> end.minusWeeks(1)
                 MONTH -> end.minusMonths(1)

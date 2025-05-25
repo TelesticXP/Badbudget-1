@@ -1,3 +1,27 @@
+/*
+References:
+
+1. Title: Get data with Cloud Firestore
+   Author: Firebase
+   Date: May 23, 2025
+   URL: https://firebase.google.com/docs/firestore/query-data/get-data
+
+2. Title: Add data to Cloud Firestore
+   Author: Firebase
+   Date: May 23, 2025
+   URL: https://firebase.google.com/docs/firestore/manage-data/add-data
+
+3. Title: Delete data from Cloud Firestore
+   Author: Firebase
+   Date: May 23, 2025
+   URL: https://firebase.google.com/docs/firestore/manage-data/delete-data
+
+4. Title: com.google.firebase.firestore.ktx
+   Author: Firebase
+   Date: October 18, 2023
+   URL: https://firebase.google.com/docs/reference/kotlin/com/google/firebase/firestore/ktx/package-summary
+*/
+
 package com.example.badbudget
 
 import com.example.badbudget.models.Budget
@@ -9,8 +33,7 @@ import com.google.firebase.ktx.Firebase
 object FirestoreService {
     private val db = Firebase.firestore
 
-    // ─── Expenses ───────────────────────────────────────────────────────
-
+    // expenses methods
     fun getExpenses(userId: String, callback: (List<Expense>) -> Unit) {
         db.collection("expenses")
             .whereEqualTo("userId", userId)
@@ -26,12 +49,12 @@ object FirestoreService {
     fun addExpense(exp: Expense, onComplete: (Boolean) -> Unit) {
         val collection = db.collection("expenses")
         if (exp.id.isBlank()) {
-            // new
+            // new record
             collection.add(exp.copy(id = ""))
                 .addOnSuccessListener { onComplete(true) }
                 .addOnFailureListener { onComplete(false) }
         } else {
-            // update existing
+            // update existing record
             collection.document(exp.id)
                 .set(exp)
                 .addOnSuccessListener { onComplete(true) }
@@ -39,8 +62,7 @@ object FirestoreService {
         }
     }
 
-    // ─── Budgets ────────────────────────────────────────────────────────
-
+    // budget methods
     fun getBudgets(userId: String, callback: (List<Budget>) -> Unit) {
         db.collection("budgets")
             .whereEqualTo("userId", userId)
@@ -56,12 +78,10 @@ object FirestoreService {
     fun addOrUpdateBudget(b: Budget, onComplete: (Boolean) -> Unit) {
         val collection = db.collection("budgets")
         if (b.id.isBlank()) {
-            // new
             collection.add(b.copy(id = ""))
                 .addOnSuccessListener { onComplete(true) }
                 .addOnFailureListener { onComplete(false) }
         } else {
-            // update
             collection.document(b.id)
                 .set(b)
                 .addOnSuccessListener { onComplete(true) }
@@ -69,7 +89,7 @@ object FirestoreService {
         }
     }
 
-    // ─── Categories ─────────────────────────────────────────────────────
+    // category methods
 
     fun getCategories(userId: String, callback: (List<Category>) -> Unit) {
         db.collection("categories")
@@ -86,12 +106,10 @@ object FirestoreService {
     fun addCategory(cat: Category, onComplete: (Boolean) -> Unit) {
         val collection = db.collection("categories")
         if (cat.id.isBlank()) {
-            // new
             collection.add(cat.copy(id = ""))
                 .addOnSuccessListener { onComplete(true) }
                 .addOnFailureListener { onComplete(false) }
         } else {
-            // update
             collection.document(cat.id)
                 .set(cat)
                 .addOnSuccessListener { onComplete(true) }
@@ -107,7 +125,7 @@ object FirestoreService {
             .addOnFailureListener { onComplete(false) }
     }
 
-    // ─── Gamification stats ────────────────────────────────────────────
+    // gamification stats methods
     fun getStats(userId: String, callback: (com.example.badbudget.models.GamificationStats?) -> Unit) {
         db.collection("stats")
             .document(userId)

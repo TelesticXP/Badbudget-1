@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.badbudget.model.CategorySpend
+import com.example.badbudget.models.CategorySpend
 import com.google.android.material.button.MaterialButton
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -25,7 +25,7 @@ class SpendSummaryActivity : AppCompatActivity() {
 
     private val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     private var startDate = ""
-    private var endDate   = ""
+    private var endDate = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +66,7 @@ class SpendSummaryActivity : AppCompatActivity() {
             ).show()
         }
         btnStart.setOnClickListener { pickListener(true) }
-        btnEnd.setOnClickListener   { pickListener(false) }
+        btnEnd.setOnClickListener { pickListener(false) }
     }
 
     private fun updateUi() {
