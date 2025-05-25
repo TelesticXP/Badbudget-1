@@ -32,7 +32,7 @@
             android:theme="@style/Theme.BadBudget" />
 
         <activity
-            android:name=".DashboardActivity"
+            android:name=".MainActivity"
             android:exported="false"
             android:theme="@style/Theme.BadBudget" />
 
@@ -41,19 +41,7 @@
             android:exported="false"
             android:theme="@style/Theme.BadBudget" />
 
-        <activity
-            android:name=".BudgetsActivity"
-            android:exported="false"
-            android:theme="@style/Theme.BadBudget" />
-
-        <activity android:name=".SpendSummaryActivity"
-            android:exported="false"/>
-
-        <activity android:name=".AwardsActivity"
-            android:exported="false"/>
-
-        <activity android:name=".ExpenseHistoryActivity"
-            android:exported="false"/>
+        <!-- screens now implemented as fragments -->
 
         <activity android:name=".ReceiptViewerActivity"
             android:exported="false"/>
