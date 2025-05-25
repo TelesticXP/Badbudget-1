@@ -7,8 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.RatingBar
 import com.example.badbudget.R
-import android.widget.RatingBar
-import android.widget.TextView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.example.badbudget.R.id
 
@@ -41,10 +39,6 @@ class AwardsActivity : AppCompatActivity() {
         progressPoints = findViewById(R.id.progressPoints)
         ratingBar = findViewById(R.id.ratingBar)
         avatarView = findViewById(R.id.imageAvatar)
-
-        textBadges = findViewById(R.id.textBadges)
-        progressPoints = findViewById(R.id.progressPoints)
-        ratingBar = findViewById(R.id.ratingBar)
         medals = listOf(
             findViewById(R.id.medal1),
             findViewById(R.id.medal2),
